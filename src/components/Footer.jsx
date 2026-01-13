@@ -31,7 +31,7 @@ const Footer = ({ setViewPort }) => {
                     </div>
                 </div>
             </div>
-            <p className='text-center text-gray-500 border-t text-sm mt-10 mx-6 lg:mx-32 py-10'>©2023, All Rights Reserved.</p>
+          <p className="text-center text-gray-500 border-t text-sm mt-10 mx-6 lg:mx-32 py-10">©{new Date().getFullYear()}, All Rights Reserved.</p>
         </div>
     );
 }
