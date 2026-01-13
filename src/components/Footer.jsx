@@ -26,7 +26,7 @@ const Footer = ({ setViewPort }) => {
                         <div className='flex justify-center z-50 gap-6'>
                             <SocialMediaIcons width={28} height={28} navigateTo={"https://www.facebook.com/techibot/"} srcImage={"/footer/Facebook_logo.svg"} alt={"fb"} />
                             <SocialMediaIcons width={28} height={28} navigateTo={"https://www.instagram.com/techibot02/"} srcImage={"/footer/Instagram_logo.svg"} alt={"Instagram"} />
-                            <SocialMediaIcons width={28} height={28} navigateTo={"https://www.tiktok.com/@web_d3veloper?_t=8iMaaq3OjxQ&_r=1"} srcImage={"/footer/Tiktok_icon.svg"} alt={"tiktok"} />
+                            <SocialMediaIcons width={28} height={28} navigateTo={"https://www.linkedin.com/in/aaronpanablon/"} srcImage={"/footer/Linkedin_logo.svg"} alt={"linkedin"} />
                         </div>
                     </div>
                 </div>

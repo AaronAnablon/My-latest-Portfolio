@@ -19,7 +19,7 @@ const About = ({ title }, ref) => {
             <Image className='mx-auto md:w-full w-64' src={"/profile.webp"} width={600} height={600} />
             <div className='grid justify-start lg:mx-14 mx-0 gap-10'>
               <p className='uppercase lg:text-start text-center text-2xl lg:text-4xl font-bold'>About Me</p>
-              <p>Ideas spark in your mind, I make them fly on screens. I'm a passionate freelancer who transforms visions into delightful, user-centric apps. Let's collaborate!</p>
+              <p>Ideas spark in your mind, I make them fly on screens. I'm a passionate full stack developer who transforms visions into delightful, user-centric apps. Let's collaborate!</p>
             </div>
           </div>
           <div>

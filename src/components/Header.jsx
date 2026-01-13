@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 
 
 const Header = ({ setViewPort }) => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const router = useRouter();
+    const pathname = usePathname();
 
     const handleScroll = () => {
         const currentScrollPos = window.scrollY;
@@ -22,9 +25,22 @@ const Header = ({ setViewPort }) => {
     }, [prevScrollPos]);
 
     const handleScrollToSection = (ref) => {
-        setViewPort(ref)
+        if (setViewPort) {
+            setViewPort(ref);
+        }
         setMobileMenuOpen(false);
     }
+
+    const handleNavigation = (path, ref = null) => {
+        if (pathname === path && ref && setViewPort) {
+            // Same page, scroll to section
+            setViewPort(ref);
+        } else if (path) {
+            // Different page, navigate
+            router.push(path);
+        }
+        setMobileMenuOpen(false);
+    };
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
@@ -40,10 +56,10 @@ const Header = ({ setViewPort }) => {
             }
                 ${isScrolled ? "hidden" : "visible"} `}>
             <div className='max-w-screen-2xl w-full flex items-center relative justify-between'>
-                <div className={`lg:ml-16 rounded-full bg-white 
+                <div className={`lg:ml-16 rounded-full bg-white cursor-pointer
                     ${isMobileMenuOpen && 'hidden'}`}>
                     <Image height={50} width={50}
-                        onClick={() => handleScrollToSection("homeRef")}
+                        onClick={() => handleNavigation("/", "homeRef")}
                         className='' src={"/Logo.png"} alt='logo' />
                 </div>
                 <div className={`text-gray-100 text-xl items-center 
@@ -56,13 +72,16 @@ const Header = ({ setViewPort }) => {
                     </div>
                     <button className={`py-4 px-6 cursor-pointer hover:bg-gray-500 rounded-full 
                     ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
-                        onClick={() => handleScrollToSection("homeRef")}>Blog</button>
+                        onClick={() => handleNavigation("/", "homeRef")}>Home</button>
+                    <button className={`py-4 px-6 cursor-pointer hover:bg-gray-500 rounded-full 
+                    ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
+                        onClick={() => handleNavigation("/projects")}>Projects</button>
                     <button className={`py-4 px-6 cursor-pointer whitespace-nowrap hover:bg-gray-500 rounded-full 
                     ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
-                        onClick={() => handleScrollToSection("aboutRef")}>About Me</button>
+                        onClick={() => handleNavigation("/", "aboutRef")}>About Me</button>
                     <button className={`py-4 px-6 cursor-pointer whitespace-nowrap hover:bg-gray-500 rounded-full 
                     ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
-                        onClick={() => handleScrollToSection("beAGuestRef")}>Skills</button>
+                        onClick={() => handleNavigation("/", "beAGuestRef")}>Skills</button>
                     <a
                         href="https://www.facebook.com/techibot"
                         className={`py-4 px-8 cursor-pointer whitespace-nowrap hover:bg-gray-500 rounded-full bg-gray-500 

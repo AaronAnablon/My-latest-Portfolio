@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import StoriesCards from '@/helpers/StoriesCards';
 
 
@@ -49,16 +50,16 @@ const Home = ({ }, ref) => {
             These represent a selection of projects I've crafted for my clients. Please note that these are placeholders designed to safeguard the privacy and confidentiality of my valued clientele.</p>
           <div className='grid justify-center z-10 lg:p-10 px-8 py-4 gap-2 lg:gap-8'>
             <div className='lg:flex grid gap-2 lg:gap-12'>
-              <StoriesCards navigateTo={"https://portfolio1-tau-six.vercel.app/"}
+              <StoriesCards navigateTo={"https://animated-portfolio0.vercel.app/"}
                 srcImage={"/2ndSection/portfolio.png"}
                 width={200}
                 height={150}
                 text={"A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next js"}
                 alt={"Stories cards"} />
-              <StoriesCards navigateTo={"https://moon-delivery.vercel.app"}
-                srcImage={"/2ndSection/ecommerce.png"}
+              <StoriesCards navigateTo={"https://ecommercewithpayment.vercel.app/"}
+                srcImage={"/2ndSection/withEpaymentEcommerce.png"}
                 width={200}
-                text={"E-commerce web application. Web application that have GUI for Customers, Sellers, Rider and admin."}
+                text={"An e-commerce web application with payment gateway integration using the Stripe API and login authentication using NextAuth for Google and Facebook."}
                 height={150}
                 alt={"Stories cards"} />
             </div>
@@ -69,15 +70,17 @@ const Home = ({ }, ref) => {
                 height={150}
                 text={"Facial recogniton web application that can record attendance of students or employees."}
                 alt={"Stories cards"} />
-              <StoriesCards navigateTo={"https://aaron-projects-enrollment-system-docs.vercel.app/"}
-                srcImage={"/2ndSection/enrollment_system.webp"}
+              <StoriesCards navigateTo={"https://www.npmjs.com/package/document-processing-cleaner"}
+                srcImage={"/2ndSection/npm.png"}
                 width={200}
-                text={"Enrollment system documentation. Documentation that will help build and run my capstone project entitled Enrollment System."}
+                text={"react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js."}
                 height={150}
                 alt={"Stories cards"} />
             </div>
             <div className='flex justify-center'>
-              <a href={"#"} className='px-4 py-2 bg-slate-600 rounded-lg text-white'>More Projects</a>
+              <Link href="/projects" className='px-4 py-2 bg-slate-600 hover:bg-slate-500 rounded-lg text-white transition-colors duration-300'>
+                More Projects
+              </Link>
             </div>
           </div>
           <Image className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60' src={"2ndSection/Sound_Waves.svg"} width={300} height={300} alt='blog' />
