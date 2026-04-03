@@ -18,9 +18,9 @@ const Home = ({ }, ref) => {
                 whileInView={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
                 transition={{ type: 'spring' }}
-                className='lg:text-4xl text-2xl text-shadow-black uppercase font-bold'>Your Favorite
+                className='lg:text-4xl text-2xl text-shadow-black uppercase font-bold'>Your
                 <span className='lg:text-5xl text-2xl gap-2 font-extrabold flex'>
-                  <ins className='text-[#2f36ab] text-shadow-blue'>Developer </ins><p> </p>
+                  <ins className='text-[#2f36ab] text-shadow-blue'>Engineer </ins><p> </p>
                 </span>
                 IS always Available for your needs</motion.h1>
               <p className='my-10 text-sm lg:mx-0 lg:text-xl'>Arrange a meeting for us to discuss your use case and let us make it up and running for your users.</p>
