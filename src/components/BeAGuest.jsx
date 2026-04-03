@@ -16,7 +16,9 @@ import {
   SiTauri,
   SiRust,
   SiFirebase,
-  SiSqlite
+  SiSqlite,
+  SiPuppeteer,
+  SiJest
 } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import { SiVisualstudio } from "react-icons/si";
@@ -36,18 +38,19 @@ const BeAGuest = ({ title }, ref) => {
           <BeAGuestCards text="JAVASCRIPT" icon={<SiJavascript className='text-yellow-600' size={32} />} />
           <BeAGuestCards text="CSS" icon={<SiCss3 className='text-blue-600' size={32} />} />
           <BeAGuestCards text="TAILWIND" icon={<SiTailwindcss className='text-blue-600' size={32} />} />
+          <BeAGuestCards text="PUPPETEER" icon={<SiPuppeteer className='text-green-600' size={32} />} />
+          <BeAGuestCards text="JEST" icon={<SiJest className='text-red-600' size={32} />} />
           <BeAGuestCards text="BOOTSTRAP" icon={<SiBootstrap className='text-violet-600' size={32} />} />
           <BeAGuestCards text="REACT" icon={<SiReact className='text-blue-600' size={32} />} />
           <BeAGuestCards text="NEXT JS" icon={<SiNextdotjs className='text-black bg-white rounded-full' size={32} />} />
+          <BeAGuestCards text="VITE" icon={<SiVite className='text-yellow-600' size={32} />} />
           <BeAGuestCards text="NODE JS" icon={<SiNodedotjs className='text-green-600' size={32} />} />
           <BeAGuestCards text="REACT NATIVE" icon={<TbBrandReactNative className='text-blue-600' size={32} />} />
           <BeAGuestCards text="MYSQL" icon={<SiMysql className='text-blue-600' size={32} />} />
           <BeAGuestCards text="SQLITE" icon={<SiSqlite className='text-blue-600' size={32} />} />
           <BeAGuestCards text="MONGODB" icon={<SiMongodb className='text-green-600' size={32} />} />
           <BeAGuestCards text="FIREBASE" icon={<SiFirebase className='text-yellow-600' size={32} />} />
-          <BeAGuestCards text="RUST" icon={<SiRust className='text-red-700' size={32} />} />
-          <BeAGuestCards text="TAURI" icon={<SiTauri className='text-yellow-600' size={32} />} />
-          <BeAGuestCards text="VITE" icon={<SiVite className='text-yellow-600' size={32} />} />
+
         </div>
       </div>
 
