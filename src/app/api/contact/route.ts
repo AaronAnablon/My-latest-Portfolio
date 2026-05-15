@@ -1,9 +1,25 @@
 import { NextResponse } from 'next/server';
+import { resolveMx } from 'node:dns/promises';
 import nodemailer from 'nodemailer';
 
 export const runtime = 'nodejs';
 
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+const hasMailExchange = async (email: string) => {
+  const domain = email.split('@')[1];
+
+  if (!domain) {
+    return false;
+  }
+
+  try {
+    const records = await resolveMx(domain);
+    return records.length > 0;
+  } catch {
+    return false;
+  }
+};
 
 export async function POST(request: Request) {
   try {
@@ -11,6 +27,10 @@ export async function POST(request: Request) {
 
     if (typeof senderEmail !== 'string' || !isValidEmail(senderEmail)) {
       return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+    }
+
+    if (!(await hasMailExchange(senderEmail))) {
+      return NextResponse.json({ error: 'Please enter an email address with a valid mail domain.' }, { status: 400 });
     }
 
     if (typeof message !== 'string' || message.trim().length < 5) {
