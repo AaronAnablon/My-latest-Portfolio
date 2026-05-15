@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Variants } from 'framer-motion';
 
-export type ViewportKey = 'homeRef' | 'aboutRef' | 'beAGuestRef';
+export type ViewportKey = 'homeRef' | 'aboutRef' | 'beAGuestRef' | 'footerRef';
 
 export interface SectionProps {
   title?: string;

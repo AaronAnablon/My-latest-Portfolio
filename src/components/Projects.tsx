@@ -215,11 +215,10 @@ const Projects = () => {
           that challenge creativity and technical expertise.
         </p>
         <a
-          target='_blank'
-          href='https://www.facebook.com/techibot'
+          href='#contact'
           className='inline-block rounded-full px-8 py-4 bg-[#2e840d] hover:bg-[#2e840d]/80 text-white text-xl transition-colors duration-300'
         >
-          Let's Work Together
+          Send me an email
         </a>
       </motion.div>
 
