@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Aaron Anablon Portfolio
+
+Personal portfolio for Aaron Anablon, a software engineer focused on building practical, maintainable web applications and tailored digital solutions for clients.
+
+This site presents my profile, skills, featured projects, client feedback, and contact options in one place. It is built with Next.js, React, TypeScript, Tailwind CSS, and Framer Motion.
+
+## Profile
+
+I craft well-structured, maintainable code and develop applications that connect business needs with strong technical execution. I enjoy taking raw ideas, refining them, and turning them into reliable, production-ready web applications.
+
+My work includes desktop, mobile, and web applications, with an emphasis on useful digital experiences that help businesses launch, improve workflows, and serve their users more effectively.
+
+## Featured Work
+
+- Animated portfolio websites with smooth transitions and modern layouts
+- E-commerce applications with payment integration and authentication
+- AI chatbot integration using OpenAI APIs
+- Face recognition attendance systems
+- Browser-based document processing with TensorFlow.js and OpenCV.js
+- React utility packages published through npm
+
+## Skills
+
+- Frontend: HTML, CSS, JavaScript, React, Next.js, Vite, Tailwind CSS, Bootstrap
+- Backend and tools: Node.js, Puppeteer, Jest
+- Mobile and desktop: React Native, Visual Basic
+- Databases and platforms: MySQL, SQLite, MongoDB, Firebase
+- AI and document processing: TensorFlow.js, OpenCV.js, OpenAI API integration
+
+## Tech Stack
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Nodemailer
+- React Icons
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Project inquiries can be sent through the contact form on the site.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Facebook: [Techibot](https://www.facebook.com/techibot/)
+- Instagram: [techibot02](https://www.instagram.com/techibot02/)
+- LinkedIn: [Aaron Anablon](https://www.linkedin.com/in/aaronpanablon/)
