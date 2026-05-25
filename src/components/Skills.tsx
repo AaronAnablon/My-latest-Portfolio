@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import Image from 'next/image';
-import BeAGuestCards from '@/helpers/BeAGuestCards';
+import BeAGuestCards from '@/helpers/SkillsCard';
 import type { SectionWithViewportProps } from '@/types';
 import {
   SiHtml5,

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Home from '@/components/Home';
 import About from '@/components/About';
-import BeAGuest from '@/components/BeAGuest';
+import BeAGuest from '@/components/Skills';
 import Footer from '@/components/Footer';
 import type { ViewportKey } from '@/types';
 
@@ -14,12 +14,14 @@ export default function App() {
   const homeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const beAGuestRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const refs = {
     homeRef,
     aboutRef,
     beAGuestRef,
+    footerRef,
   };
 
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function App() {
         <Home ref={homeRef} setViewPort={setViewPort} title='Home' />
         <About ref={aboutRef} title='About' />
         <BeAGuest ref={beAGuestRef} title='Be a Guest' />
-        <Footer setViewPort={setViewPort} />
+        <Footer ref={footerRef} setViewPort={setViewPort} />
       </div>
     </main>
   );

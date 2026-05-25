@@ -5,7 +5,7 @@ import Link from 'next/link';
 import StoriesCards from '@/helpers/StoriesCards';
 import type { SectionWithViewportProps } from '@/types';
 
-const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, ref) => {
+const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title, setViewPort }, ref) => {
   return (
     <div ref={ref}>
       <div className='h-max grid gap-24 justify-center pt-52'>
@@ -24,10 +24,10 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
                 </span>
                 IS always Available for your needs</motion.h1>
               <p className='my-10 text-sm lg:mx-0 lg:text-xl'>Arrange a meeting for us to discuss your use case and let us make it up and running for your users.</p>
-              <a target='blank' href='https://www.facebook.com/techibot'
+              <button type='button' onClick={() => setViewPort?.('footerRef')}
                 className='rounded-full absolute -bottom-16 w-max flex items-center text-xl px-8 py-4 bg-[#2e840d]'>
-                Chat with me
-              </a>
+                Send me an email
+              </button>
             </div>
           </div>
           <div className='relative flex px-10 justify-center'>

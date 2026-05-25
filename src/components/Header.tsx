@@ -77,16 +77,13 @@ const Header = ({ setViewPort }: SectionWithViewportProps) => {
           <button className={`py-4 px-6 cursor-pointer whitespace-nowrap hover:bg-gray-500 rounded-full 
                     ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
             onClick={() => handleNavigation('/', 'beAGuestRef')}>Skills</button>
-          <a
-            href='https://www.facebook.com/techibot'
+          <button
             className={`py-4 px-8 cursor-pointer whitespace-nowrap hover:bg-gray-500 rounded-full bg-gray-500 
                              ${isMobileMenuOpen ? 'visible' : 'hidden md:block'}`}
-            onClick={() => handleScrollToSection('homeRef')}
-            target='_blank'
-            rel='noopener noreferrer'
+            onClick={() => handleNavigation('/', 'footerRef')}
           >
-            Chat with me
-          </a>
+            Send me an email
+          </button>
         </div>
       </div>
     </div>
