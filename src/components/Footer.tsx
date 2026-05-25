@@ -13,12 +13,12 @@ const Footer = ({ setViewPort }: SectionWithViewportProps) => {
       <div className='grid lg:mx-28 pt-10 lg:py-32'>
         <div className='lg:flex grid lg:items-end justify-center lg:justify-between'>
           <div className='grid gap-6'>
-            <div className='flex bg-white rounded-full justify-center'>
+              <div className='flex bg-white rounded-full justify-center'>
               <Image
                 height={180}
                 width={180}
                 onClick={() => handleScrollToSection('homeRef')}
-                src={'/Logo.png'}
+                src={'/assets/logo.png'}
                 alt='logo'
               />
             </div>

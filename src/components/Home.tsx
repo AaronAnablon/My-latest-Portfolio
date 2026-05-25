@@ -31,10 +31,10 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
             </div>
           </div>
           <div className='relative flex px-10 justify-center'>
-            <Image className='absolute right-10 -bottom-10 pb-10' src={'/1stSection/Sound_Waves_icon.svg'} width={100} height={100} alt='blog' />
-            <Image className='absolute right-14 lg:w-max w-20 lg:right-32 top-3' src={'/Logo.png'} width={100} height={100} alt='blog' />
-            <Image className='z-10 w-72 rounded-full border-2 border-blue-600 lg:w-96' src={'/1stSection/profile.png'} width={506} height={660} alt='blog' />
-            <Image className='absolute -lg:left-14 left-6 z-20 bottom-14 lg:bottom-24 w-64 lg:w-max' src={'/1stSection/horizontal_Image.png'} width={323} height={85} alt='blog' />
+            <Image className='absolute right-10 -bottom-10 pb-10' src={'/hero/Sound_Waves_icon.svg'} width={100} height={100} alt='blog' />
+            <Image className='absolute right-14 lg:w-max w-20 lg:right-32 top-3' src={'/assets/logo.png'} width={100} height={100} alt='blog' />
+            <Image className='z-10 w-72 rounded-full border-2 border-blue-600 lg:w-96' src={'/hero/profile.png'} width={506} height={660} alt='blog' />
+            <Image className='absolute -lg:left-14 left-6 z-20 bottom-14 lg:bottom-24 w-64 lg:w-max' src={'/hero/horizontal_Image.png'} width={323} height={85} alt='blog' />
           </div>
         </div>
         <div className='grid gap-6 relative justify-center'>
@@ -52,7 +52,7 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
             <div className='lg:flex grid gap-2 lg:gap-12'>
               <StoriesCards
                 navigateTo={'https://animated-portfolio0.vercel.app/'}
-                srcImage={'/2ndSection/portfolio.png'}
+                srcImage={'/projects/portfolio.png'}
                 width={200}
                 height={150}
                 text={'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next js'}
@@ -60,7 +60,7 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
               />
               <StoriesCards
                 navigateTo={'https://ecommercewithpayment.vercel.app/'}
-                srcImage={'/2ndSection/withEpaymentEcommerce.png'}
+                srcImage={'/projects/withEpaymentEcommerce.png'}
                 width={200}
                 text={'An e-commerce web application with payment gateway integration using the Stripe API and login authentication using NextAuth for Google and Facebook.'}
                 height={150}
@@ -70,7 +70,7 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
             <div className='lg:flex grid gap-2 lg:gap-12'>
               <StoriesCards
                 navigateTo={'https://ifsuattendance.netlify.app'}
-                srcImage={'/2ndSection/faceRecognition.png'}
+                srcImage={'/projects/faceRecognition.png'}
                 width={200}
                 height={150}
                 text={'Facial recogniton web application that can record attendance of students or employees.'}
@@ -78,7 +78,7 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
               />
               <StoriesCards
                 navigateTo={'https://www.npmjs.com/package/document-processing-cleaner'}
-                srcImage={'/2ndSection/npm.png'}
+                srcImage={'/projects/npm.png'}
                 width={200}
                 text={'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.'}
                 height={150}
@@ -91,7 +91,7 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }, re
               </Link>
             </div>
           </div>
-          <Image className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60' src={'/2ndSection/Sound_Waves.svg'} width={300} height={300} alt='blog' />
+          <Image className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60' src={'/projects/Sound_Waves.svg'} width={300} height={300} alt='blog' />
         </div>
       </div>
     </div>

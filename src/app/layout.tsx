@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import './globals.css';
-import Favicon from '../../public/favicon.ico';
+import Favicon from '../../public/assets/favicon.ico';
 
 const inter = Inter({ subsets: ['latin'] });
 

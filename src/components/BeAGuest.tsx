@@ -26,8 +26,8 @@ const BeAGuest = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title }
   return (
     <div ref={ref}>
       <div className='grid gap-12 pb-32 lg:pb-96 max-w-screen-xl mx-auto relative justify-center'>
-        <Image className='absolute bottom-0 -right-24' src={'/Logo.png'} alt='logo' width={800} height={1200} />
-        <Image className='absolute -bottom-96 -right-24' src={'/6thSection/Polygon_left.svg'} width={400} height={400} alt='about' />
+        <Image className='absolute bottom-0 -right-24' src={'/assets/logo.png'} alt='logo' width={800} height={1200} />
+        <Image className='absolute -bottom-96 -right-24' src={'/subscribe/Polygon_left.svg'} width={400} height={400} alt='about' />
         <p className='uppercase text-center font-bold text-2xl lg:text-5xl'>Skills</p>
         <p className='text-center mx-2 lg:mx-52'>By choosing to collaborate with me, clients become integral participants in the creation of bespoke projects, each one a testament to our shared commitment to innovation and success. Together, we embark on a journey to transform ideas into reality and elevate digital experiences to unparalleled heights.</p>
         <div className='flex flex-wrap text-gray-300 justify-center lg:mx-32 gap-4'>

@@ -55,14 +55,14 @@ const Header = ({ setViewPort }: SectionWithViewportProps) => {
       <div className='max-w-screen-2xl w-full flex items-center relative justify-between'>
         <div className={`lg:ml-16 rounded-full bg-white cursor-pointer
                     ${isMobileMenuOpen && 'hidden'}`}>
-          <Image height={50} width={50} onClick={() => handleNavigation('/', 'homeRef')} className='' src={'/Logo.png'} alt='logo' />
+          <Image height={50} width={50} onClick={() => handleNavigation('/', 'homeRef')} className='' src={'/assets/logo.png'} alt='logo' />
         </div>
         <div className={`text-gray-100 text-xl items-center 
                 ${isMobileMenuOpen ? 'grid w-full justify-center' : 'flex justify-end space-x-4 md:space-x-8 '}`}>
           <div className='md:hidden block cursor-pointer' onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ?
-              <Image src={'/close.svg'} width={50} height={50} className='absolute top-0 right-0' alt='Menu' /> :
-              <Image src={'/burger.svg'} width={50} height={50} className='absolute top-0 right-0' alt='Menu' />
+              {isMobileMenuOpen ?
+              <Image src={'/icons/close.svg'} width={50} height={50} className='absolute top-0 right-0' alt='Menu' /> :
+              <Image src={'/icons/burger.svg'} width={50} height={50} className='absolute top-0 right-0' alt='Menu' />
             }
           </div>
           <button className={`py-4 px-6 cursor-pointer hover:bg-gray-500 rounded-full 

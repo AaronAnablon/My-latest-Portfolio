@@ -10,7 +10,7 @@ const Projects = () => {
         id: 1,
         title: 'Animated Portfolio',
         navigateTo: 'https://animated-portfolio0.vercel.app/',
-        srcImage: '/2ndSection/portfolio.png',
+        srcImage: '/projects/portfolio.png',
         description: 'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next.js with Framer Motion for smooth animations.',
         technologies: ['Next.js', 'React', 'Framer Motion', 'Tailwind CSS'],
         category: 'Web Development',
@@ -19,7 +19,7 @@ const Projects = () => {
         id: 2,
         title: 'AI chatbot integration',
         navigateTo: 'https://aaron-projects-ai-chatbot.vercel.app/',
-        srcImage: '/2ndSection/aichat.png',
+        srcImage: '/projects/aichat.png',
         description: 'This is developed using Next Js and OpenAi Api version 3.5. The website provides example of correct prompts and response to get the correct or desired output. Feel free to experiment ai chatbot prompts here.',
         technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
         category: 'E-commerce',
@@ -30,7 +30,7 @@ const Projects = () => {
         id: 3,
         title: 'Face Recognition Attendance',
         navigateTo: 'https://ifsuattendance.netlify.app',
-        srcImage: '/2ndSection/faceRecognition.png',
+        srcImage: '/projects/faceRecognition.png',
         description: 'Facial recognition web application that can record attendance of students or employees using advanced AI algorithms.',
         technologies: ['React', 'TensorFlow.js', 'OpenCV', 'Machine Learning'],
         category: 'AI/ML',
@@ -39,10 +39,20 @@ const Projects = () => {
         id: 4,
         title: 'Document Processing Cleaner',
         navigateTo: 'https://www.npmjs.com/package/document-processing-cleaner',
-        srcImage: '/2ndSection/npm.png',
+        srcImage: '/projects/npm.png',
         description: 'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.',
         technologies: ['React', 'TensorFlow.js', 'OpenCV.js', 'NPM Package'],
         category: 'Library/Package',
+      },
+      {
+        id: 5,
+        title: 'QR Code Generator by Aaron',
+        navigateTo: 'https://www.npmjs.com/package/react-qr-code-generator-by-aaron',
+        srcImage: '/projects/qrcodegenerator.png',
+        description: 'A simple and easy-to-use QR code generator for React apps, designed to help developers quickly create QR codes with minimal setup.',
+        technologies: ['React', 'QR Code', 'NPM Package'],
+        category: 'Library/Package',
+        buttonText: 'View Package',
       },
     ] satisfies Project[],
     more: [
@@ -50,28 +60,28 @@ const Projects = () => {
         id: 5,
         title: 'Animated Portfolio',
         navigateTo: 'https://animated-portfolio0.vercel.app/',
-        srcImage: '/2ndSection/portfolio.png',
+        srcImage: '/projects/portfolio.png',
         description: 'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next js',
       },
       {
         id: 6,
         title: 'E-commerce Platform',
         navigateTo: 'https://moon-delivery.vercel.app',
-        srcImage: '/2ndSection/ecommerce.png',
+        srcImage: '/projects/ecommerce.png',
         description: 'E-commerce web application. Web application that have GUI for Customers, Sellers, Rider and admin.',
       },
       {
         id: 7,
         title: 'E-Commerce with Payment',
         navigateTo: 'https://ecommercewithpayment.vercel.app/',
-        srcImage: '/2ndSection/withEpaymentEcommerce.png',
+        srcImage: '/projects/withEpaymentEcommerce.png',
         description: 'An e-commerce web application with payment gateway integration using the Stripe API and login authentication using NextAuth for Google and Facebook.',
       },
       {
         id: 8,
         title: 'Document Processing Cleaner',
         navigateTo: 'https://www.npmjs.com/package/document-processing-cleaner',
-        srcImage: '/2ndSection/npm.png',
+        srcImage: '/projects/npm.png',
         description: 'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.',
         buttonText: 'View Package',
       },
@@ -225,7 +235,7 @@ const Projects = () => {
 
       <Image
         className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60'
-        src='/2ndSection/Sound_Waves.svg'
+        src='/projects/Sound_Waves.svg'
         width={300}
         height={300}
         alt='background decoration'
