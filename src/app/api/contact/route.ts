@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     }
 
     if (typeof message !== 'string' || message.trim().length < 5) {
-      return NextResponse.json({ error: 'Please enter a message with at least 10 characters.' }, { status: 400 });
+      return NextResponse.json({ error: 'Please enter a message with at least 5 characters.' }, { status: 400 });
     }
 
     const smtpUser = process.env.SMTP_USER;
