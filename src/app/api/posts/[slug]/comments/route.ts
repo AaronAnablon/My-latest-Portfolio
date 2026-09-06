@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { addComment, getComments } from '@/lib/engagement';
-import { projectSlugs } from '@/lib/projectSlugs';
+import { postSlugs } from '@/lib/postSlugs';
 
 export const runtime = 'nodejs';
 
 export async function GET(_request: Request, { params }: { params: { slug: string } }) {
-  if (!projectSlugs.has(params.slug)) {
-    return NextResponse.json({ error: 'Unknown project.' }, { status: 404 });
+  if (!postSlugs.has(params.slug)) {
+    return NextResponse.json({ error: 'Unknown post.' }, { status: 404 });
   }
 
   try {
@@ -18,8 +18,8 @@ export async function GET(_request: Request, { params }: { params: { slug: strin
 }
 
 export async function POST(request: Request, { params }: { params: { slug: string } }) {
-  if (!projectSlugs.has(params.slug)) {
-    return NextResponse.json({ error: 'Unknown project.' }, { status: 404 });
+  if (!postSlugs.has(params.slug)) {
+    return NextResponse.json({ error: 'Unknown post.' }, { status: 404 });
   }
 
   try {

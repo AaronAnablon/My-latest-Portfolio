@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState, type FormEvent } from 'react';
 import { projectsData } from '@/data/projects';
 import { slugify } from '@/lib/slug';
+import { TESTIMONIALS_SLUG } from '@/lib/postSlugs';
 import type { ProjectComment, ProjectLikeState } from '@/types';
 import {
   FaBriefcase,
@@ -79,8 +80,7 @@ const testimonials = [
 
 const getProjectId = (title: string) => `project-${slugify(title)}`;
 
-function ProjectPost({ project, index }: { project: (typeof projects)[number]; index: number }) {
-  const slug = slugify(project.title);
+function usePostEngagement(slug: string) {
   const [likeState, setLikeState] = useState<ProjectLikeState>({ count: 0, liked: false });
   const [isLiking, setIsLiking] = useState(false);
   const [comments, setComments] = useState<ProjectComment[] | null>(null);
@@ -91,14 +91,14 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
   const [commentError, setCommentError] = useState('');
 
   useEffect(() => {
-    fetch(`/api/projects/${slug}/like`)
+    fetch(`/api/posts/${slug}/like`)
       .then((response) => response.json())
       .then((data) => { if (typeof data?.count === 'number') setLikeState(data); })
       .catch(() => {});
   }, [slug]);
 
   useEffect(() => {
-    fetch(`/api/projects/${slug}/comments`)
+    fetch(`/api/posts/${slug}/comments`)
       .then((response) => response.json())
       .then((data) => { if (Array.isArray(data)) setComments(data); })
       .catch(() => setComments([]));
@@ -111,7 +111,7 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
     setLikeState((state) => ({ count: state.count + (state.liked ? -1 : 1), liked: !state.liked }));
 
     try {
-      const response = await fetch(`/api/projects/${slug}/like`, { method: 'POST' });
+      const response = await fetch(`/api/posts/${slug}/like`, { method: 'POST' });
       if (!response.ok) throw new Error();
       setLikeState(await response.json());
     } catch {
@@ -128,7 +128,7 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
     setCommentError('');
 
     try {
-      const response = await fetch(`/api/projects/${slug}/comments`, {
+      const response = await fetch(`/api/posts/${slug}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ authorName, body: commentBody }),
@@ -145,7 +145,65 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
     }
   };
 
-  const commentCount = comments?.length ?? 0;
+  return {
+    likeState,
+    toggleLike,
+    comments,
+    commentCount: comments?.length ?? 0,
+    isCommentsOpen,
+    setIsCommentsOpen,
+    authorName,
+    setAuthorName,
+    commentBody,
+    setCommentBody,
+    isPostingComment,
+    commentError,
+    submitComment,
+  };
+}
+
+function CommentsPanel({ engagement }: { engagement: ReturnType<typeof usePostEngagement> }) {
+  const { comments, authorName, setAuthorName, commentBody, setCommentBody, commentError, isPostingComment, submitComment } = engagement;
+
+  return (
+    <div className='comments-panel'>
+      <form onSubmit={submitComment} className='comment-form'>
+        <input
+          value={authorName}
+          onChange={(event) => setAuthorName(event.target.value)}
+          placeholder='Your name'
+          maxLength={60}
+          required
+        />
+        <textarea
+          value={commentBody}
+          onChange={(event) => setCommentBody(event.target.value)}
+          placeholder='Write a comment…'
+          maxLength={500}
+          required
+        />
+        {commentError && <p className='comment-error' role='alert'>{commentError}</p>}
+        <button type='submit' disabled={isPostingComment}>{isPostingComment ? 'Posting…' : 'Post comment'}</button>
+      </form>
+      <ul className='comment-list'>
+        {comments === null && <li className='comment-empty'>Loading comments…</li>}
+        {comments !== null && comments.length === 0 && <li className='comment-empty'>Be the first to comment.</li>}
+        {comments?.map((comment) => (
+          <li key={comment.id}>
+            <strong>{comment.authorName}</strong>
+            <p>{comment.body}</p>
+            <time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString()}</time>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ProjectPost({ project, index }: { project: (typeof projects)[number]; index: number }) {
+  const slug = slugify(project.title);
+  const engagement = usePostEngagement(slug);
+  const { likeState, toggleLike, comments, commentCount, isCommentsOpen, setIsCommentsOpen } = engagement;
 
   return (
     <article id={getProjectId(project.title)} className='profile-card project-post'>
@@ -181,46 +239,15 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
         </button>
         <a href={project.url} target='_blank' rel='noreferrer'><FaShare /> Share</a>
       </div>
-      {isCommentsOpen && (
-        <div className='comments-panel'>
-          <form onSubmit={submitComment} className='comment-form'>
-            <input
-              value={authorName}
-              onChange={(event) => setAuthorName(event.target.value)}
-              placeholder='Your name'
-              maxLength={60}
-              required
-            />
-            <textarea
-              value={commentBody}
-              onChange={(event) => setCommentBody(event.target.value)}
-              placeholder='Write a comment…'
-              maxLength={500}
-              required
-            />
-            {commentError && <p className='comment-error' role='alert'>{commentError}</p>}
-            <button type='submit' disabled={isPostingComment}>{isPostingComment ? 'Posting…' : 'Post comment'}</button>
-          </form>
-          <ul className='comment-list'>
-            {comments === null && <li className='comment-empty'>Loading comments…</li>}
-            {comments !== null && comments.length === 0 && <li className='comment-empty'>Be the first to comment.</li>}
-            {comments?.map((comment) => (
-              <li key={comment.id}>
-                <strong>{comment.authorName}</strong>
-                <p>{comment.body}</p>
-                <time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString()}</time>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {isCommentsOpen && <CommentsPanel engagement={engagement} />}
     </article>
   );
 }
 
 function TestimonialPost() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [liked, setLiked] = useState(false);
+  const engagement = usePostEngagement(TESTIMONIALS_SLUG);
+  const { likeState, toggleLike, comments, commentCount, isCommentsOpen, setIsCommentsOpen } = engagement;
 
   const showPrevious = () => setCurrentSlide((slide) => (slide === 0 ? testimonials.length - 1 : slide - 1));
   const showNext = () => setCurrentSlide((slide) => (slide === testimonials.length - 1 ? 0 : slide + 1));
@@ -276,12 +303,22 @@ function TestimonialPost() {
           ))}
         </div>
       </div>
-      <div className='post-stats'><span>💡 {liked ? '39' : '38'}</span><span>{currentSlide + 1} of {testimonials.length}</span></div>
+      <div className='post-stats'>
+        <span>💡 {likeState.count}</span>
+        <button type='button' className='comment-count-link' onClick={() => setIsCommentsOpen((open) => !open)}>
+          {comments === null ? '…' : commentCount} comment{commentCount === 1 ? '' : 's'}
+        </button>
+      </div>
       <div className='post-actions'>
-        <button onClick={() => setLiked(!liked)} className={liked ? 'liked' : ''} aria-pressed={liked}><FaRegThumbsUp /> Like</button>
-        <button type='button'><FaRegCommentDots /> Comment</button>
+        <button onClick={toggleLike} className={likeState.liked ? 'liked' : ''} aria-pressed={likeState.liked}>
+          <FaRegThumbsUp /> Like
+        </button>
+        <button type='button' onClick={() => setIsCommentsOpen((open) => !open)}>
+          <FaRegCommentDots /> Comment
+        </button>
         <button type='button'><FaShare /> Share</button>
       </div>
+      {isCommentsOpen && <CommentsPanel engagement={engagement} />}
     </article>
   );
 }
