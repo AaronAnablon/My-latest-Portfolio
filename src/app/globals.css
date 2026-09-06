@@ -79,6 +79,23 @@ a { color: inherit; text-decoration: none; }
 .post-actions button, .post-actions a { min-height: 42px; border: 0; background: transparent; color: #5c5c5c; display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 5px; font-size: 13px; font-weight: 700; cursor: pointer; }
 .post-actions button:hover, .post-actions a:hover { background: #f3f3f3; }
 .post-actions .liked { color: var(--blue); }
+.comment-count-link { border: 0; background: transparent; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+.comment-count-link:hover { text-decoration: underline; }
+.comments-panel { padding: 12px 16px 16px; border-top: 1px solid #e7e7e7; display: grid; gap: 14px; }
+.comment-form { display: grid; gap: 8px; }
+.comment-form input, .comment-form textarea { padding: 8px 11px; border: 1px solid var(--line); border-radius: 8px; background: #f8f9fa; color: var(--ink); }
+.comment-form textarea { min-height: 64px; resize: vertical; }
+.comment-form input:focus, .comment-form textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; background: white; }
+.comment-form button { justify-self: start; padding: 7px 16px; border: 0; border-radius: 18px; background: var(--blue); color: white; font-size: 13px; font-weight: 700; cursor: pointer; }
+.comment-form button:hover { background: var(--blue-dark); }
+.comment-form button:disabled { opacity: .6; cursor: default; }
+.comment-error { margin: 0; color: #b3261e; font-size: 12px; }
+.comment-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-height: 320px; overflow-y: auto; }
+.comment-list li { padding: 9px 12px; border-radius: 10px; background: #f3f2ef; }
+.comment-list strong { font-size: 13px; }
+.comment-list p { margin: 3px 0 4px; font-size: 13px; line-height: 1.45; }
+.comment-list time { color: var(--muted); font-size: 10px; }
+.comment-empty { padding: 6px 2px; color: var(--muted); font-size: 12px; background: transparent !important; }
 .testimonial-carousel { position: relative; overflow: hidden; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; background: linear-gradient(135deg, #edf4fa, #dce8f2); }
 .testimonial-carousel:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
 .testimonial-slide { height: 310px; padding: 24px 52px 38px; display: grid; place-items: center; }

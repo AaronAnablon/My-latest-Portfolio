@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@types/nodemailer": "^8.0.0",
     "framer-motion": "^10.16.16",
     "next": "14.0.4",

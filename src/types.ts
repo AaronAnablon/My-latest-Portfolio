@@ -30,6 +30,18 @@ export interface ProjectCardProps {
   categoryColor?: string;
 }
 
+export interface ProjectLikeState {
+  count: number;
+  liked: boolean;
+}
+
+export interface ProjectComment {
+  id: number;
+  authorName: string;
+  body: string;
+  createdAt: string;
+}
+
 export interface BeAGuestCardProps {
   navigateTo?: string;
   icon: ReactNode;

@@ -1,8 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { projectsData } from '@/data/projects';
+import { slugify } from '@/lib/slug';
+import type { ProjectComment, ProjectLikeState } from '@/types';
 import {
   FaBriefcase,
   FaChevronDown,
@@ -75,10 +77,75 @@ const testimonials = [
   '/testimonials/mes4.png',
 ];
 
-const getProjectId = (title: string) => `project-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+const getProjectId = (title: string) => `project-${slugify(title)}`;
 
 function ProjectPost({ project, index }: { project: (typeof projects)[number]; index: number }) {
-  const [liked, setLiked] = useState(false);
+  const slug = slugify(project.title);
+  const [likeState, setLikeState] = useState<ProjectLikeState>({ count: 0, liked: false });
+  const [isLiking, setIsLiking] = useState(false);
+  const [comments, setComments] = useState<ProjectComment[] | null>(null);
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [authorName, setAuthorName] = useState('');
+  const [commentBody, setCommentBody] = useState('');
+  const [isPostingComment, setIsPostingComment] = useState(false);
+  const [commentError, setCommentError] = useState('');
+
+  useEffect(() => {
+    fetch(`/api/projects/${slug}/like`)
+      .then((response) => response.json())
+      .then((data) => { if (typeof data?.count === 'number') setLikeState(data); })
+      .catch(() => {});
+  }, [slug]);
+
+  useEffect(() => {
+    fetch(`/api/projects/${slug}/comments`)
+      .then((response) => response.json())
+      .then((data) => { if (Array.isArray(data)) setComments(data); })
+      .catch(() => setComments([]));
+  }, [slug]);
+
+  const toggleLike = async () => {
+    if (isLiking) return;
+    setIsLiking(true);
+    const previous = likeState;
+    setLikeState((state) => ({ count: state.count + (state.liked ? -1 : 1), liked: !state.liked }));
+
+    try {
+      const response = await fetch(`/api/projects/${slug}/like`, { method: 'POST' });
+      if (!response.ok) throw new Error();
+      setLikeState(await response.json());
+    } catch {
+      setLikeState(previous);
+    } finally {
+      setIsLiking(false);
+    }
+  };
+
+  const submitComment = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isPostingComment) return;
+    setIsPostingComment(true);
+    setCommentError('');
+
+    try {
+      const response = await fetch(`/api/projects/${slug}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ authorName, body: commentBody }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to post your comment right now.');
+
+      setComments((current) => [data, ...(current ?? [])]);
+      setCommentBody('');
+    } catch (error) {
+      setCommentError(error instanceof Error ? error.message : 'Unable to post your comment right now.');
+    } finally {
+      setIsPostingComment(false);
+    }
+  };
+
+  const commentCount = comments?.length ?? 0;
 
   return (
     <article id={getProjectId(project.title)} className='profile-card project-post'>
@@ -99,12 +166,54 @@ function ProjectPost({ project, index }: { project: (typeof projects)[number]; i
         <Image src={project.image} width={900} height={520} alt={`${project.title} preview`} sizes='(max-width: 768px) 100vw, 620px' />
         <span>View project <FaExternalLinkAlt /></span>
       </a>
-      <div className='post-stats'><span>💡 {liked ? '48' : '47'}</span><span>3 comments</span></div>
+      <div className='post-stats'>
+        <span>💡 {likeState.count}</span>
+        <button type='button' className='comment-count-link' onClick={() => setIsCommentsOpen((open) => !open)}>
+          {comments === null ? '…' : commentCount} comment{commentCount === 1 ? '' : 's'}
+        </button>
+      </div>
       <div className='post-actions'>
-        <button onClick={() => setLiked(!liked)} className={liked ? 'liked' : ''} aria-pressed={liked}><FaRegThumbsUp /> Like</button>
-        <a href={`mailto:?subject=${encodeURIComponent(project.title)}&body=${encodeURIComponent(project.url)}`}><FaRegCommentDots /> Comment</a>
+        <button onClick={toggleLike} className={likeState.liked ? 'liked' : ''} aria-pressed={likeState.liked}>
+          <FaRegThumbsUp /> Like
+        </button>
+        <button type='button' onClick={() => setIsCommentsOpen((open) => !open)}>
+          <FaRegCommentDots /> Comment
+        </button>
         <a href={project.url} target='_blank' rel='noreferrer'><FaShare /> Share</a>
       </div>
+      {isCommentsOpen && (
+        <div className='comments-panel'>
+          <form onSubmit={submitComment} className='comment-form'>
+            <input
+              value={authorName}
+              onChange={(event) => setAuthorName(event.target.value)}
+              placeholder='Your name'
+              maxLength={60}
+              required
+            />
+            <textarea
+              value={commentBody}
+              onChange={(event) => setCommentBody(event.target.value)}
+              placeholder='Write a comment…'
+              maxLength={500}
+              required
+            />
+            {commentError && <p className='comment-error' role='alert'>{commentError}</p>}
+            <button type='submit' disabled={isPostingComment}>{isPostingComment ? 'Posting…' : 'Post comment'}</button>
+          </form>
+          <ul className='comment-list'>
+            {comments === null && <li className='comment-empty'>Loading comments…</li>}
+            {comments !== null && comments.length === 0 && <li className='comment-empty'>Be the first to comment.</li>}
+            {comments?.map((comment) => (
+              <li key={comment.id}>
+                <strong>{comment.authorName}</strong>
+                <p>{comment.body}</p>
+                <time dateTime={comment.createdAt}>{new Date(comment.createdAt).toLocaleDateString()}</time>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </article>
   );
 }
