@@ -1,91 +1,36 @@
 import { motion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 import ProjectCard from './ProjectCard';
+import { projectsData } from '@/data/projects';
 import type { Project } from '@/types';
 
 const Projects = () => {
+  // Transform shared project data with display-specific properties
+  const projectsWithMetadata = projectsData.map((project, index) => ({
+    id: index + 1,
+    navigateTo: project.url,
+    srcImage: project.image,
+    title: project.title,
+    description: project.description,
+    technologies: project.tags,
+  }));
+
   const projects = {
-    featured: [
-      {
-        id: 1,
-        title: 'Animated Portfolio',
-        navigateTo: 'https://animated-portfolio0.vercel.app/',
-        srcImage: '/projects/portfolio.png',
-        description: 'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next.js with Framer Motion for smooth animations.',
-        technologies: ['Next.js', 'React', 'Framer Motion', 'Tailwind CSS'],
-        category: 'Web Development',
-      },
-      {
-        id: 2,
-        title: 'AI chatbot integration',
-        navigateTo: 'https://aaron-projects-ai-chatbot.vercel.app/',
-        srcImage: '/projects/aichat.png',
-        description: 'This is developed using Next Js and OpenAi Api version 3.5. The website provides example of correct prompts and response to get the correct or desired output. Feel free to experiment ai chatbot prompts here.',
-        technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-        category: 'E-commerce',
-      },
-    ] satisfies Project[],
-    webApps: [
-      {
-        id: 3,
-        title: 'Face Recognition Attendance',
-        navigateTo: 'https://ifsuattendance.netlify.app',
-        srcImage: '/projects/faceRecognition.png',
-        description: 'Facial recognition web application that can record attendance of students or employees using advanced AI algorithms.',
-        technologies: ['React', 'TensorFlow.js', 'OpenCV', 'Machine Learning'],
-        category: 'AI/ML',
-      },
-      {
-        id: 4,
-        title: 'Document Processing Cleaner',
-        navigateTo: 'https://www.npmjs.com/package/document-processing-cleaner',
-        srcImage: '/projects/npm.png',
-        description: 'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.',
-        technologies: ['React', 'TensorFlow.js', 'OpenCV.js', 'NPM Package'],
-        category: 'Library/Package',
-      },
-      {
-        id: 5,
-        title: 'QR Code Generator by Aaron',
-        navigateTo: 'https://www.npmjs.com/package/react-qr-code-generator-by-aaron',
-        srcImage: '/projects/qrcodegenerator.png',
-        description: 'A simple and easy-to-use QR code generator for React apps, designed to help developers quickly create QR codes with minimal setup.',
-        technologies: ['React', 'QR Code', 'NPM Package'],
-        category: 'Library/Package',
-        buttonText: 'View Package',
-      },
-    ] satisfies Project[],
-    more: [
-      {
-        id: 5,
-        title: 'Animated Portfolio',
-        navigateTo: 'https://animated-portfolio0.vercel.app/',
-        srcImage: '/projects/portfolio.png',
-        description: 'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next js',
-      },
-      {
-        id: 6,
-        title: 'E-commerce Platform',
-        navigateTo: 'https://moon-delivery.vercel.app',
-        srcImage: '/projects/ecommerce.png',
-        description: 'E-commerce web application. Web application that have GUI for Customers, Sellers, Rider and admin.',
-      },
-      {
-        id: 7,
-        title: 'E-Commerce with Payment',
-        navigateTo: 'https://ecommercewithpayment.vercel.app/',
-        srcImage: '/projects/withEpaymentEcommerce.png',
-        description: 'An e-commerce web application with payment gateway integration using the Stripe API and login authentication using NextAuth for Google and Facebook.',
-      },
-      {
-        id: 8,
-        title: 'Document Processing Cleaner',
-        navigateTo: 'https://www.npmjs.com/package/document-processing-cleaner',
-        srcImage: '/projects/npm.png',
-        description: 'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.',
-        buttonText: 'View Package',
-      },
-    ] satisfies Project[],
+    featured: projectsWithMetadata.slice(0, 2).map((p, i) => ({
+      ...p,
+      id: i + 1,
+      category: ['Web Development', 'E-commerce'][i],
+    })),
+    webApps: projectsWithMetadata.slice(2).map((p, i) => ({
+      ...p,
+      id: i + 3,
+      category: ['AI/ML', 'Library/Package', 'Library/Package', 'Productivity', ''][i],
+      buttonText: [undefined, undefined, 'View Package', undefined, undefined][i],
+    })),
+    more: projectsWithMetadata.map((p, i) => ({
+      ...p,
+      id: i + 9,
+    })),
   };
 
   const containerVariants: Variants = {

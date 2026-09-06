@@ -3,9 +3,14 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import StoriesCards from '@/helpers/StoriesCards';
+import { projectsData } from '@/data/projects';
+import { HERO_SECTION, HOME_FEATURED_PROJECTS_COUNT } from '@/constants/config';
 import type { SectionWithViewportProps } from '@/types';
 
 const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title, setViewPort }, ref) => {
+  // Get featured projects from shared data
+  const featuredProjects = projectsData.slice(0, HOME_FEATURED_PROJECTS_COUNT);
+
   return (
     <div ref={ref}>
       <div className='h-max grid gap-24 justify-center pt-52'>
@@ -18,25 +23,32 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title, setV
                 exit={{ x: 100, opacity: 0 }}
                 transition={{ type: 'spring' }}
                 className='lg:text-4xl text-2xl text-shadow-black uppercase font-bold'
-              >Your
+              >
+                Your
                 <span className='lg:text-5xl text-2xl gap-2 font-extrabold flex'>
                   <ins className='text-[#2f36ab] text-shadow-blue'>Engineer </ins><p> </p>
                 </span>
-                IS always Available for your needs</motion.h1>
-              <p className='my-10 text-sm lg:mx-0 lg:text-xl'>Arrange a meeting for us to discuss your use case and let us make it up and running for your users.</p>
-              <button type='button' onClick={() => setViewPort?.('footerRef')}
-                className='rounded-full absolute -bottom-16 w-max flex items-center text-xl px-8 py-4 bg-[#2e840d]'>
-                Send me an email
+                IS always Available for your needs
+              </motion.h1>
+              <p className='my-10 text-sm lg:mx-0 lg:text-xl'>{HERO_SECTION.subHeading}</p>
+              <button
+                type='button'
+                onClick={() => setViewPort?.('footerRef')}
+                className='rounded-full absolute -bottom-16 w-max flex items-center text-xl px-8 py-4 bg-[#2e840d] hover:bg-[#266d08] transition-colors duration-200'
+              >
+                {HERO_SECTION.ctaButtonText}
               </button>
             </div>
           </div>
           <div className='relative flex px-10 justify-center'>
-            <Image className='absolute right-10 -bottom-10 pb-10' src={'/hero/Sound_Waves_icon.svg'} width={100} height={100} alt='blog' />
-            <Image className='absolute right-14 lg:w-max w-20 lg:right-32 top-3' src={'/assets/logo.png'} width={100} height={100} alt='blog' />
-            <Image className='z-10 w-72 rounded-full border-2 border-blue-600 lg:w-96' src={'/hero/profile.png'} width={506} height={660} alt='blog' />
-            <Image className='absolute -lg:left-14 left-6 z-20 bottom-14 lg:bottom-24 w-64 lg:w-max' src={'/hero/horizontal_Image.png'} width={323} height={85} alt='blog' />
+            <Image className='absolute right-10 -bottom-10 pb-10' src={'/hero/Sound_Waves_icon.svg'} width={100} height={100} alt='decorative sound waves' />
+            <Image className='absolute right-14 lg:w-max w-20 lg:right-32 top-3' src={'/assets/logo.png'} width={100} height={100} alt='logo' />
+            <Image className='z-10 w-72 rounded-full border-2 border-blue-600 lg:w-96' src={'/hero/profile.png'} width={506} height={660} alt='Aaron Anablon profile' priority />
+            <Image className='absolute -lg:left-14 left-6 z-20 bottom-14 lg:bottom-24 w-64 lg:w-max' src={'/hero/horizontal_Image.png'} width={323} height={85} alt='decorative horizontal image' />
           </div>
         </div>
+
+        {/* Featured Projects Section */}
         <div className='grid gap-6 relative justify-center'>
           <div className='flex flex-wrap text-shadow-white text-2xl lg:text-5xl font-extrabold justify-center gap-2 uppercase'>
             <p>My</p>
@@ -47,51 +59,42 @@ const Home = forwardRef<HTMLDivElement, SectionWithViewportProps>(({ title, setV
             <p className='text-[#2e840d]'>mind</p>
           </div>
           <p className='text-center px-4'>
-            These represent a selection of projects I've crafted for my clients. Please note that these are placeholders designed to safeguard the privacy and confidentiality of my valued clientele.</p>
+            These represent a selection of projects I've crafted for my clients. Please note that these are placeholders designed to safeguard the privacy and confidentiality of my valued clientele.
+          </p>
+
           <div className='grid justify-center z-10 lg:p-10 px-8 py-4 gap-2 lg:gap-8'>
-            <div className='lg:flex grid gap-2 lg:gap-12'>
-              <StoriesCards
-                navigateTo={'https://animated-portfolio0.vercel.app/'}
-                srcImage={'/projects/portfolio.png'}
-                width={200}
-                height={150}
-                text={'A carefully crafted portfolio with animations and transitions that may suit your needs. This is developed using Next js'}
-                alt={'Stories cards'}
-              />
-              <StoriesCards
-                navigateTo={'https://ecommercewithpayment.vercel.app/'}
-                srcImage={'/projects/withEpaymentEcommerce.png'}
-                width={200}
-                text={'An e-commerce web application with payment gateway integration using the Stripe API and login authentication using NextAuth for Google and Facebook.'}
-                height={150}
-                alt={'Stories cards'}
-              />
-            </div>
-            <div className='lg:flex grid gap-2 lg:gap-12'>
-              <StoriesCards
-                navigateTo={'https://ifsuattendance.netlify.app'}
-                srcImage={'/projects/faceRecognition.png'}
-                width={200}
-                height={150}
-                text={'Facial recogniton web application that can record attendance of students or employees.'}
-                alt={'Stories cards'}
-              />
-              <StoriesCards
-                navigateTo={'https://www.npmjs.com/package/document-processing-cleaner'}
-                srcImage={'/projects/npm.png'}
-                width={200}
-                text={'react-document-cleaner package. A React hook-based utility for processing document images in the browser using DeepLab (TensorFlow.js) and OpenCV.js.'}
-                height={150}
-                alt={'Stories cards'}
-              />
-            </div>
+            {/* Dynamically render featured projects in pairs */}
+            {Array.from({ length: Math.ceil(featuredProjects.length / 2) }).map((_, rowIndex) => (
+              <div key={rowIndex} className='lg:flex grid gap-2 lg:gap-12'>
+                {[0, 1].map((colIndex) => {
+                  const projectIndex = rowIndex * 2 + colIndex;
+                  if (projectIndex >= featuredProjects.length) return null;
+                  const project = featuredProjects[projectIndex];
+                  return (
+                    <StoriesCards
+                      key={project.title}
+                      navigateTo={project.url}
+                      srcImage={project.image}
+                      width={200}
+                      height={150}
+                      text={project.description}
+                      alt={project.title}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+
             <div className='flex justify-center'>
-              <Link href='/projects' className='px-4 py-2 bg-slate-600 hover:bg-slate-500 rounded-lg text-white transition-colors duration-300'>
+              <Link
+                href='/projects'
+                className='px-4 py-2 bg-slate-600 hover:bg-slate-500 rounded-lg text-white transition-colors duration-300'
+              >
                 More Projects
               </Link>
             </div>
           </div>
-          <Image className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60' src={'/projects/Sound_Waves.svg'} width={300} height={300} alt='blog' />
+          <Image className='absolute left-0 lg:-left-20 lg:w-max w-44 -bottom-20 lg:-bottom-60' src={'/projects/Sound_Waves.svg'} width={300} height={300} alt='decorative sound waves background' />
         </div>
       </div>
     </div>
